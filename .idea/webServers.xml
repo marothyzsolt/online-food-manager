@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="9936a1e4-3191-422a-845b-9a445cbe95bb" name="zsolt.adroit">
+        <fileTransfer accessType="SFTP" host="zsolt.adroit" port="22" sshConfigId="4c9cdd0f-1172-413a-a65b-63042dfc17d0" sshConfig="root@zsolt.adroit:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
