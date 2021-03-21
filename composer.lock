@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4a16c3c541bd99241cab1c21ce8e83ac",
+    "content-hash": "4437a5b4101e6e1766ae3c5b16789d91",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1379,6 +1379,67 @@
                 }
             ],
             "time": "2021-01-18T20:58:21+00:00"
+        },
+        {
+            "name": "marothyzsolt/laravel-foreign-keys",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/marothyzsolt/laravel-foreign-keys.git",
+                "reference": "729c59391191c1704233f38594aea95e33232bd8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/marothyzsolt/laravel-foreign-keys/zipball/729c59391191c1704233f38594aea95e33232bd8",
+                "reference": "729c59391191c1704233f38594aea95e33232bd8",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^8.0",
+                "php": "^7.4|^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.0",
+                "phpunit/phpunit": "^8.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "MarothyZsolt\\LaravelForeignKeys\\LaravelForeignKeysServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "MarothyZsolt\\LaravelForeignKeys\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Zsolt Marothy",
+                    "email": "marothyzsolt@egaming.hu",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel foreign key manager",
+            "homepage": "https://github.com/marothyzsolt/laravel-foreign-keys",
+            "keywords": [
+                "foreign keys",
+                "laravel",
+                "laravel-foreign-keys",
+                "marothyzsolt"
+            ],
+            "support": {
+                "issues": "https://github.com/marothyzsolt/laravel-foreign-keys/issues",
+                "source": "https://github.com/marothyzsolt/laravel-foreign-keys/tree/master"
+            },
+            "time": "2021-03-20T19:40:49+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -7356,7 +7417,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "marothyzsolt/laravel-foreign-keys": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
