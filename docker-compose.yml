@@ -1,0 +1,63 @@
+version: '3.5'
+services:
+
+  # PHP Service
+  app:
+    image: adroitgroup/php:8.0
+    container_name: ${APP_ENV}_${NAME}_app
+    restart: always
+    volumes:
+      - ./docker/app/entrypoint.sh:/scripts/entrypoint.sh
+      - ./:/var/www
+    depends_on:
+      - mysql
+    networks:
+      - default
+
+  # Nginx Service
+  nginx:
+    container_name: ${APP_ENV}_${NAME}_nginx
+    restart: always
+    image: adroitgroup/nginx:latest
+    volumes:
+      - ./:/var/www
+    depends_on:
+      - mysql
+    environment:
+      CERT_SS_C: HU
+      CERT_SS_ST: Veszprem
+      CERT_SS_L: Veszprem
+      CERT_SS_O: Pannon
+      CERT_SS_CN: food-manager.adroit.hu
+    networks:
+      - default
+      - proxynet
+
+  # MySQL Service
+  mysql:
+    image: mysql:5.7.22
+    container_name: ${APP_ENV}_${NAME}_mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: $DB_PASSWORD
+      MYSQL_DATABASE: $DB_DATABASE
+      MYSQL_USER: $DB_USERNAME
+      MYSQL_PASSWORD: $DB_PASSWORD
+    volumes:
+      - ./docker/mysql/data:/var/lib/mysql/
+
+  # PHPMyAdmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: ${APP_ENV}_${NAME}_phpmyadmin
+    ports:
+      - "50050:80"
+    environment:
+      - PMA_PORT=3306
+      - PMA_HOST=mysql
+    depends_on:
+      - mysql
+
+networks:
+  proxynet:
+    name: proxy_network
