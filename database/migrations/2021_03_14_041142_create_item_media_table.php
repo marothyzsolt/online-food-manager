@@ -1,10 +1,13 @@
 <?php
 
+use App\Models\Item;
+use App\Models\Media;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMediaTable extends Migration
+class CreateItemMediaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +16,10 @@ class CreateMediaTable extends Migration
      */
     public function up(): void
     {
-        Schema::create('media', function (Blueprint $table) {
+        Schema::create('item_media', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('hash')->unique();
-            $table->integer('size');
-            $table->string('mime_type');
-            $table->timestamps();
+            $table->foreignIdFor(Item::class);
+            $table->foreignIdFor(Media::class);
         });
     }
 
@@ -30,6 +30,6 @@ class CreateMediaTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('media');
+        Schema::dropIfExists('item_media');
     }
 }
