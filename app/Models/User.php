@@ -11,6 +11,16 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
+    public const TYPE_COURIER = 'courier';
+    public const TYPE_ADMIN = 'admin';
+    public const TYPE_GUEST = 'guest';
+
+    public const TYPE_LIST = [
+        self::TYPE_COURIER,
+        self::TYPE_ADMIN,
+        self::TYPE_GUEST,
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
