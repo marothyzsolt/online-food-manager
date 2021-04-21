@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->app->bind(ItemService::class, function () {
-            return new ItemService(Currency::where('code', config('app.main_currency')));
+            return new ItemService(Currency::where('code', config('app.main_currency'))->first());
         });
     }
 }
