@@ -19,7 +19,7 @@ use App\Models\Restaurant;
 use App\Models\User;
 
 return [
-    'menu_item' => [
+    'item_menu' => [
         'menu_id' => Menu::class,
         'item_id' => Item::class,
     ],

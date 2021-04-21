@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\ItemPrice;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,8 +19,9 @@ class CreateItemPriceTable extends Migration
             $table->foreignId('item_id');
             $table->foreignId('currency_id');
             $table->float('price');
-            $table->enum('discount_type', ['price, percentage'])->nullable();
-            $table->float('discount');
+            $table->enum('discount_type', ItemPrice::DISCOUNT_TYPE_LIST)->nullable();
+            $table->float('discount')->default(0);
+            $table->timestamps();
 
             $table->index(['item_id', 'currency_id']);
         });
