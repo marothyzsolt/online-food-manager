@@ -1,18 +1,18 @@
 <?php
 
+use App\Http\Controllers\Admin\Item\ItemController;
+use App\Http\Controllers\Admin\Restaurant\MenuRestaurantController;
+use App\Http\Controllers\Admin\Restaurant\RestaurantController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Restaurant\MenuItemController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Route::get('/', [HomeController::class, 'index']);
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::resource('/restaurants', RestaurantController::class)->parameters([
+    'restaurants' => 'restaurant:slug',
+]);
+Route::resource('/restaurants/{restaurant:slug}/menus', MenuRestaurantController::class);
+
+//Route::resource('/restaurants/{restaurant:slug}/menus/{menu}/items', MenuItemController::class);
+Route::resource('/restaurants/{restaurant:slug}/items', ItemController::class);
