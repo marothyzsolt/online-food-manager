@@ -18,7 +18,7 @@ class CreateMenusTable extends Migration
             $table->id();
             $table->foreignIdFor(Restaurant::class);
             $table->string('name');
-            $table->text('description')->default('');
+            $table->text('description');
             $table->foreignId('media_id')->nullable()->default(null);
             $table->timestamps();
         });
