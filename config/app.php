@@ -230,4 +230,6 @@ return [
 
     ],
 
+    'main_currency' => 'HUF',
+
 ];
