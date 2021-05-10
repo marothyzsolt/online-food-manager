@@ -12,7 +12,7 @@ class Menu extends Model
     use HasFactory;
 
     protected $fillable = [
-        'restaurant_id', 'name', 'description', 'style', 'media_id'
+        'restaurant_id', 'name', 'description', 'media_id'
     ];
 
     public function media(): BelongsTo

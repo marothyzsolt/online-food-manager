@@ -27,4 +27,13 @@ class ItemPrice extends Model
     {
         return $this->belongsTo(Currency::class);
     }
+
+    public function getDiscountedPriceAttribute()
+    {
+        return match ($this->discountType) {
+            self::DISCOUNT_TYPE_PRICE => $this->price - $this->discount,
+            self::DISCOUNT_TYPE_PERCENTAGE => $this->price * ($this->discount / 100),
+            default => $this->price,
+        };
+    }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller as BaseController;
 
@@ -21,7 +22,7 @@ class Controller extends BaseController
         return response()->view($view, $data, $status, $headers);
     }
 
-    protected function back(bool $success, iterable $data = []): Response
+    protected function back(bool $success, iterable $data = []): Response|RedirectResponse
     {
         return redirect()->back()->withSuccess(['status' => $success, 'data' => $data]);
     }

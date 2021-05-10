@@ -14,6 +14,15 @@ services:
     networks:
       - default
 
+  # Node Service
+  node:
+    image: adroitgroup/node:base
+    container_name: ${APP_ENV}_${NAME}_node
+    restart: always
+    entrypoint: /bin/bash -c "sleep 1000000"
+    volumes:
+      - ./:/app
+
   # Nginx Service
   nginx:
     container_name: ${APP_ENV}_${NAME}_nginx

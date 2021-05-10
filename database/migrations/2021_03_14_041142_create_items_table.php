@@ -17,6 +17,7 @@ class CreateItemsTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
+            $table->integer('make_time')->default(0);
             $table->timestamps();
         });
     }

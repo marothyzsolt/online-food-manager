@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Services\Media;
+namespace App\Services\Menu;
 
 use App\Models\Menu;
 use App\Models\Restaurant;
+use App\Services\Media\MediaHandler;
 use Illuminate\Http\UploadedFile;
 
 class MenuService

@@ -18,13 +18,6 @@ class RestaurantController extends Controller
         return $this->view('admin.restaurants.list', compact('restaurants'));
     }
 
-    public function show(Restaurant $restaurant): Response
-    {
-        dd($restaurant);
-
-        return $this->view('admin.restaurants.show', compact('restaurant'));
-    }
-
     public function update(UpdateRestaurantRequest $request, Restaurant $restaurant): Response
     {
         $restaurant->update($request->all());

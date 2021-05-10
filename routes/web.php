@@ -3,16 +3,28 @@
 use App\Http\Controllers\Admin\Item\ItemController;
 use App\Http\Controllers\Admin\Restaurant\MenuRestaurantController;
 use App\Http\Controllers\Admin\Restaurant\RestaurantController;
+use App\Http\Controllers\Guest\CartController;
+use App\Http\Controllers\Guest\MenuController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Restaurant\MenuItemController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::resource('/restaurants', RestaurantController::class)->parameters([
+Route::resource('/restaurants', \App\Http\Controllers\Guest\Restaurant\RestaurantController::class)->parameters([
     'restaurants' => 'restaurant:slug',
 ]);
-Route::resource('/restaurants/{restaurant:slug}/menus', MenuRestaurantController::class);
+Route::group(['prefix' => '/admin', 'as' => 'admin.'], function() {
+    Route::resource('/restaurants', RestaurantController::class)->parameters([
+        'restaurants' => 'restaurant:slug',
+    ]);
+});
+
+Route::resource('/restaurants/{restaurant:slug}/menus', MenuRestaurantController::class)->except('show');
+Route::get('/restaurants/{restaurant:slug}/menus/{menu}', [MenuController::class, 'show']);
 
 //Route::resource('/restaurants/{restaurant:slug}/menus/{menu}/items', MenuItemController::class);
 Route::resource('/restaurants/{restaurant:slug}/items', ItemController::class);
+
+Route::get('/cart', [CartController::class, 'index']);
+Route::get('/cart/add/{item}', [CartController::class, 'add']);
+Route::get('/cart/delete/{item}', [CartController::class, 'delete']);

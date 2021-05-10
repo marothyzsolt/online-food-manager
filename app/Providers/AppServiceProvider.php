@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Currency;
 use App\Services\Item\ItemService;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\View\View;
 
 class AppServiceProvider extends ServiceProvider
 {

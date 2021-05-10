@@ -28,8 +28,8 @@ class MenuFactory extends Factory
         \Storage::disk('public')->makeDirectory('images');
         $mediaHandler = app()->make(MediaHandler::class);
 
-        $imagePath = $this->faker->image('storage/app/public/images', 640, 480, 'food');
-        $imagePath = str_replace('storage/app/public/images/', '', $imagePath);
+        $imagePath = $this->faker->randomImage('images', '', 640, 480, 'food');
+        //dd($imagePath);
         $mediaHandler->setDisk('images');
         $media = $mediaHandler->makeMedia($imagePath, Media::MIME_TYPE_PNG);
 

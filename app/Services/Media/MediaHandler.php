@@ -21,6 +21,9 @@ class MediaHandler
 
     public function makeMedia(string $path, string $mimeType): Media
     {
+        if ($media = Media::where('hash', $this->makeHash($path))->first()) {
+            return $media;
+        }
         return Media::create([
             'name' => $path,
             'hash' => $this->makeHash($path),

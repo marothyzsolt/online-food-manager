@@ -21,7 +21,7 @@ class RestaurantFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         return [
             'user_id' => User::all()->random()->id,
@@ -30,6 +30,9 @@ class RestaurantFactory extends Factory
             'token' => Str::random(32),
             'slug' => Str::slug($this->faker->unique()->sentence(3)),
             'style' => $this->faker->word,
+            'phone' => $this->faker->phoneNumber,
+            'email' => $this->faker->companyEmail,
+            'address' => $this->faker->address,
         ];
     }
 }

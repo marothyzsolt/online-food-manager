@@ -10,6 +10,7 @@
  */
 
 use App\Models\Allergen;
+use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Currency;
 use App\Models\Item;
@@ -47,10 +48,18 @@ return [
         'restaurant_id' => Restaurant::class,
     ],
     'restaurants' => [
+        'media_id' => Media::class,
         'user_id' => User::class,
     ],
     'item_media' => [
         'item_id' => Item::class,
         'media_id' => Media::class,
+    ],
+    'carts' => [
+        'user_id' => User::class,
+    ],
+    'cart_items' => [
+        'cart_id' => Cart::class,
+        'item_id' => Item::class,
     ],
 ];

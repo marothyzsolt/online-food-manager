@@ -1,0 +1,53 @@
+/* @@@@@@@@@@@@@  Footer Section Start Here  @@@@@@@@@@@@@@ */
+.footer {
+    @extend %rel;
+    background: $theme-color;
+    .footer-top {
+        @extend %rel;
+        z-index: 1;
+        padding: 50px 0 32px;
+        @include breakpoint(xl) {
+            padding: 90px 0 72px;
+        }
+        .footer-area {
+            .footer-logo {
+                a {
+                    margin-bottom: 25px;
+                }
+            }
+            .scocial-media {
+                a {
+                    font-size: $fs-h6;
+                    border-radius: 100%;
+                    background: $white-color;
+                    &.facebook {
+                        color: $facebook;
+                    }
+                    &.twitter {
+                        color: $twitter;
+                    }
+                    &.linkedin {
+                        color: $linkedin;
+                    }
+                    &.vimeo {
+                        color: $vimeo;
+                    }
+                }
+            }
+            .footer-menu {
+                ul {
+                    @extend %flex;
+                    justify-content: center;
+                    li {
+                        a {
+                            color: $white-color;
+                            padding: 0 15px;
+                            margin: 5px;
+                            text-transform: uppercase;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

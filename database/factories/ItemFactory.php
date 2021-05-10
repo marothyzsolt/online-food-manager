@@ -28,6 +28,7 @@ class ItemFactory extends Factory
         return [
             'name' => $this->faker->foodName,
             'description' => $this->faker->text,
+            'make_time' => $this->faker->numberBetween(0, 30)
         ];
     }
 }

@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Restaurant\StoreRestaurantMenuRequest;
 use App\Models\Menu;
 use App\Models\Restaurant;
-use App\Services\Media\MenuService;
+use App\Services\Menu\MenuService;
 use Illuminate\Http\Response;
 
 class MenuRestaurantController extends Controller
@@ -14,6 +14,7 @@ class MenuRestaurantController extends Controller
     public function __construct(private MenuService $menuService)
     {
     }
+
 
     public function index(Restaurant $restaurant): Response
     {
