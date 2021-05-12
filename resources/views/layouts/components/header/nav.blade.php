@@ -5,22 +5,23 @@
     @auth
         @switch ($role)
             @case('admin')
-            @break
+                <li>
+                    <a href="#">Éttermek</a>
+                    <ul>
+                        <li><a href="/restaurants">Összes elérhető étterem</a></li>
+                        <li><a href="/admin/restaurants">Saját éttermek</a></li>
+                        <li><a href="/admin/restaurants/create">Új étterem regisztrálása</a></li>
+                    </ul>
+                </li>
+                @break
             @case('guest')
                 <li>
                     <a class="" href="/restaurants">Éttermek</a>
                 </li>
-            @break
+                @break
             @case('courier')
             @break
         @endswitch
-        <li>
-            <a href="#">Éttermek</a>
-            <ul>
-                <li><a href="{{ route('restaurants.index') }}">Összes elérhető étterem</a></li>
-                <li><a href="{{ route('restaurants.create') }}">Új étterem regisztrálása</a></li>
-            </ul>
-        </li>
     @endauth
 
     @guest

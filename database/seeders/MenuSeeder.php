@@ -36,7 +36,7 @@ class MenuSeeder extends Seeder
         $mediaHandler = app()->make(MediaHandler::class);
 
         Menu::factory()->count(15)->afterCreating(function (Menu $menu) use ($mediaHandler) {
-            $menu->items()->saveMany(Item::factory()->count(rand(1, 10))
+            $menu->items()->saveMany(Item::factory(['restaurant_id' => $menu->restaurant->id])->count(rand(1, 5))
                 ->afterCreating(function (Item $item) use ($mediaHandler) {
                     $imagePath = $this->faker->randomImage('images', '', 640, 480, 'food,eat,meal');
                     $mediaHandler->setDisk('images');

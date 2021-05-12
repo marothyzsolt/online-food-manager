@@ -13,13 +13,15 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::resource('/restaurants', \App\Http\Controllers\Guest\Restaurant\RestaurantController::class)->parameters([
     'restaurants' => 'restaurant:slug',
 ]);
-Route::group(['prefix' => '/admin', 'as' => 'admin.'], function() {
+Route::group(['prefix' => '/admin', 'as' => 'admin.', 'middleware' => ['user.check:admin', 'auth']], function() {
     Route::resource('/restaurants', RestaurantController::class)->parameters([
         'restaurants' => 'restaurant:slug',
     ]);
+
+    Route::resource('/restaurants/{restaurant:slug}/menus', MenuRestaurantController::class);
+    Route::resource('/restaurants/{restaurant:slug}/menus/{menu}/items', \App\Http\Controllers\Admin\Item\MenuItemController::class);
 });
 
-Route::resource('/restaurants/{restaurant:slug}/menus', MenuRestaurantController::class)->except('show');
 Route::get('/restaurants/{restaurant:slug}/menus/{menu}', [MenuController::class, 'show']);
 
 //Route::resource('/restaurants/{restaurant:slug}/menus/{menu}/items', MenuItemController::class);

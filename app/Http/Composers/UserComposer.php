@@ -36,7 +36,8 @@ class UserComposer
             'items' => $cart->cartItems,
             'service' => $this->cartService,
             'cart' => $cart,
-            'role' => $user?->type
         ]);
+
+        $view->with('role', $user?->type);
     }
 }

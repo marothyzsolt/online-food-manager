@@ -15,7 +15,7 @@ class Item extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'description', 'make_time'
+        'name', 'description', 'make_time', 'restaurant_id'
     ];
 
     public function itemPrices(): HasMany

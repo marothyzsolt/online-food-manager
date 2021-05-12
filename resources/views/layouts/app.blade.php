@@ -43,6 +43,7 @@
 <!-- scrollToTop ending here -->
 
 <script src="/assets/js/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="/assets/js/waypoints.min.js"></script>
 <script src="/assets/js/bootstrap.min.js"></script>
 <script src="/assets/js/isotope.pkgd.min.js"></script>
@@ -51,5 +52,14 @@
 <script src="/assets/js/lightcase.js"></script>
 <script src="/assets/js/jquery.counterup.min.js"></script>
 <script src="/assets/js/functions.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
+<script>
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+    $('.selectpicker').selectpicker();
+  })
+</script>
 </body>
 </html>

@@ -4,55 +4,47 @@
     <section class="popular-foods padding-tb" style="background-color: #fafeff;">
         <div class="container">
             <div class="section-header">
-                <h3>{{$restaurant->name}} étterem étlapjai</h3>
+                <h3>{{$menu->name}} étlap ({{$restaurant->name}} étterem)</h3>
             </div>
             <div class="section-wrapper">
                     <div class="shop-cart padding-tb">
                         <div class="container">
                             <div class="section-wrapper">
-                                <a class="back" href="/admin/restaurants">< Vissza</a>
                                 <div class="cart-top">
+                                    <a class="back" href="/admin/restaurants/{{$restaurant->slug}}/menus">< Vissza</a>
                                     <table>
                                         <thead>
                                         <tr>
-                                            <th>Étlap név</th>
+                                            <th>Étel neve</th>
                                             <th>Leírás</th>
-                                            <th>Ételek</th>
+                                            <th>Ár</th>
                                             <th>Szerkesztés</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($menus as $menu)
+                                        @foreach($items as $item)
                                             <tr>
                                                 <td class="product-item">
                                                     <div class="p-thumb">
-                                                        <a href="#"><img src="{{$menu->media->link}}" alt="product"></a>
+                                                        <a href="#"><img src="{{$item->mainImage()->link}}" alt=""></a>
                                                     </div>
                                                     <div class="p-content">
-                                                        <a href="/restaurants/{{$restaurant->slug}}/menus/{{$menu->id}}">{{$menu->name}}</a>
+                                                        <a href="/restaurants/{{$restaurant->slug}}/items/{{$item->id}}">{{$item->name}}</a>
                                                     </div>
                                                 </td>
-                                                <td>{{$menu->description}}</td>
+                                                <td>{{$item->description}}</td>
+                                                <td>{{$item->mainPrice->price}} {{$item->mainPrice->currency->code}}</td>
                                                 <td>
-                                                    {{$menu->items->count()}} db
-                                                </td>
-                                                <td>
-                                                    <a href="/admin/restaurants/{{$restaurant->slug}}/menus/{{$menu->id}}/items" class="action-icon" data-toggle="tooltip" data-placement="top" title="Étlap elemei">
-                                                        <i class="icofont-navigation-menu"></i>
-                                                    </a>
-                                                    <a href="/admin/restaurants/{{$restaurant->slug}}/menus/{{$menu->id}}/edit" class="action-icon" data-toggle="tooltip" data-placement="top" title="Szerkesztés">
-                                                        <i class="icofont-edit"></i>
-                                                    </a>
-                                                    <form id="delete-form-{{ $menu->id }}" action="/admin/restaurants/{{$restaurant->slug}}/menus/{{$menu->id}}"
+                                                    <form id="delete-form-{{ $item->id }}" action="/admin/restaurants/{{$restaurant->slug}}/menus/{{$menu->id}}/items/{{$item->id}}"
                                                           method="POST" style="display: none;">
                                                         @csrf
                                                         @method('delete')
                                                     </form>
                                                     <a data-toggle="tooltip" data-placement="top" title="Törlés"
                                                             class="action-icon"
-                                                       href="/admin/restaurants/{{$restaurant->slug}}/menus/{{$menu->id}}"
+                                                       href="/admin/restaurants/{{$restaurant->slug}}/menus/{{$menu->id}}/items/{{$item->id}}"
                                                        onclick="event.preventDefault();
-                                                               document.getElementById('delete-form-{{ $menu->id }}').submit();">
+                                                               document.getElementById('delete-form-{{ $item->id }}').submit();">
                                                         <i class="icofont-trash"></i>
                                                     </a>
                                                 </td>
@@ -61,7 +53,7 @@
 
                                         <tr>
                                             <td class="product-item" colspan="4" style="text-align: center">
-                                                <button class="btn btn-info btn-block" data-toggle="modal" data-target="#createMenuModal">
+                                                <button class="btn btn-info btn-block" data-toggle="modal" data-target="#createMenuItemModal">
                                                     Hozzáadás
                                                 </button>
                                             </td>
@@ -76,5 +68,5 @@
         </div>
     </section>
 
-    @include('admin.restaurants.menus.create')
+    @include('admin.restaurants.menus.items.create')
 @endsection

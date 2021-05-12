@@ -62,4 +62,7 @@ return [
         'cart_id' => Cart::class,
         'item_id' => Item::class,
     ],
+    'items' => [
+        'restaurant_id' => Restaurant::class,
+    ],
 ];

@@ -17,7 +17,7 @@ class Menu extends Model
 
     public function media(): BelongsTo
     {
-        return $this->belongsTo(Media::class);
+        return $this->belongsTo(Media::class)->withDefault();
     }
 
     public function restaurant(): BelongsTo

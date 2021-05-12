@@ -7,6 +7,7 @@ use App\Http\Requests\Restaurant\StoreRestaurantMenuRequest;
 use App\Models\Menu;
 use App\Models\Restaurant;
 use App\Services\Menu\MenuService;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 
 class MenuRestaurantController extends Controller
@@ -15,47 +16,44 @@ class MenuRestaurantController extends Controller
     {
     }
 
-
     public function index(Restaurant $restaurant): Response
     {
-        $restaurant->load(['menus.media']);
+        $restaurant->load(['menus.media', 'menus.items']);
+        $menus = $restaurant->menus;
+
+        return $this->view('admin.restaurants.menus.list', compact('menus', 'restaurant'));
     }
 
-    public function create(): Response
-    {
-        return $this->view('admin.restaurants.menus.create');
-    }
-
-    public function store(StoreRestaurantMenuRequest $request, Restaurant $restaurant): Response
+    public function store(StoreRestaurantMenuRequest $request, Restaurant $restaurant): RedirectResponse
     {
         $this->menuService->store(
             $restaurant,
             $request->get('name'),
             $request->get('description'),
-            $request->get('image')
+            $request->file('media')
         );
 
-        return $this->back(true, ['menu' => $menu]);
+        return $this->back(true);
     }
 
-    public function edit(Menu $menu): Response
+    public function edit(Restaurant $restaurant, Menu $menu): Response
     {
-        return $this->view('admin.restaurants.menus.edit');
+        return $this->view('admin.restaurants.menus.edit', compact('restaurant', 'menu'));
     }
 
-    public function update(StoreRestaurantMenuRequest $request, Menu $menu): Response
+    public function update(StoreRestaurantMenuRequest $request, Restaurant $restaurant, Menu $menu): RedirectResponse
     {
         $this->menuService->update(
             $menu,
             $request->get('name'),
             $request->get('description'),
-            $request->get('image')
+            $request->file('media')
         );
 
         return $this->back(true, ['menu' => $menu]);
     }
 
-    public function destroy(Menu $menu): Response
+    public function destroy(Restaurant $restaurant, Menu $menu): RedirectResponse
     {
         $menu->delete();
 

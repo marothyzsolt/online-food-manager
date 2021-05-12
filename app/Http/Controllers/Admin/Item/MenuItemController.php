@@ -1,9 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Restaurant;
+namespace App\Http\Controllers\Admin\Item;
 
 use App\Http\Controllers\Controller;
 use App\Models\Item;
+use App\Models\Menu;
+use App\Models\Restaurant;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class MenuItemController extends Controller
@@ -13,9 +16,13 @@ class MenuItemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Restaurant $restaurant, Menu $menu)
     {
-        //
+        $menu->load('items.images');
+        $items = $menu->items;
+        $restaurantItems = $restaurant->items()->whereNotIn('items.id', $menu->items()->pluck('items.id'))->get();
+
+        return $this->view('admin.restaurants.menus.items.list', compact('menu', 'restaurant', 'items', 'restaurantItems'));
     }
 
     /**
@@ -25,7 +32,7 @@ class MenuItemController extends Controller
      */
     public function create()
     {
-        //
+        //$menu->items()->attach();
     }
 
     /**
@@ -34,9 +41,11 @@ class MenuItemController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Restaurant $restaurant, Menu $menu)
     {
-        //
+        $menu->items()->attach($request->get('item'));
+
+        return $this->back(true);
     }
 
     /**
@@ -79,8 +88,10 @@ class MenuItemController extends Controller
      * @param  \App\Models\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Item $item)
+    public function destroy(Restaurant $restaurant, Menu $menu, Item $item): RedirectResponse
     {
-        //
+        $menu->items()->detach($item);
+
+        return $this->back(true);
     }
 }

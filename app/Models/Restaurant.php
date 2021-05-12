@@ -6,13 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Restaurant extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name', 'description', 'style', 'token', 'media_id'
+        'name', 'description', 'style', 'token', 'media_id', 'address', 'phone', 'email', 'user_id', 'slug'
     ];
 
     public function menus(): HasMany
@@ -20,14 +21,14 @@ class Restaurant extends Model
         return $this->hasMany(Menu::class);
     }
 
-    public function items()
+    public function items(): HasMany
     {
-        return $this->menus();
+        return $this->hasMany(Item::class);
     }
 
     public function media(): BelongsTo
     {
-        return $this->belongsTo(Media::class);
+        return $this->belongsTo(Media::class)->withDefault();
     }
 
     public function getDeliveryTimeAttribute(?int $value)

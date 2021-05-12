@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Restaurant;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,6 +19,7 @@ class CreateItemsTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->integer('make_time')->default(0);
+            $table->foreignIdFor(Restaurant::class);
             $table->timestamps();
         });
     }

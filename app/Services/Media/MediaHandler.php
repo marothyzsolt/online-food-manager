@@ -13,7 +13,9 @@ class MediaHandler
     public function storeUploadedMedia(UploadedFile $uploadedFile): Media
     {
         if (! ($media = $this->hashExists(md5($uploadedFile->get())))) {
-            $media = $this->makeMedia(uniqid(), $uploadedFile->getMimeType());
+            $fileName = md5($uploadedFile->get()) . '.jpg';
+            \Illuminate\Support\Facades\Storage::disk('images')->put($fileName, $uploadedFile->get());
+            $media = $this->makeMedia($fileName, $uploadedFile->getMimeType());
         }
 
         return $media;

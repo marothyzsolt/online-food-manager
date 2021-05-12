@@ -2144,36 +2144,6 @@
 			margin-bottom: 35px;
 			line-height: 30px;
 		}
-		form {
-			input,
-			textarea {
-				border-color: #ebebeb;
-				padding: 10px;
-			}
-			input {
-				height: 50px;
-                margin-bottom: 30px;
-                border: 1px solid $border-color;
-                outline: none;
-                width: 100%;
-                @include border-radius(3px);
-				@include breakpoint (sm) {
-					width: calc(100% / 2 - 15px);
-				}
-			}
-			textarea {
-                min-height: 200px;
-                padding: 15px;
-				margin-bottom: 35px;
-                outline: none;
-                @include border-radius(3px);
-			}
-			.food-btn {
-                outline: none;
-                margin-bottom: 60px;
-                @extend %pointer;
-            }
-		}
 		.post-item {
             @extend %flex;
             justify-content: space-between;
@@ -2251,4 +2221,74 @@
             font-size: 40px;
         }
     }
+}
+
+form {
+    fieldset {
+        margin: 20px 0;
+    }
+
+    .form-row {
+        width: 100%;
+        display: flex;
+
+        label {
+            flex: 0.22 1 0;
+            margin-top: 15px;
+        }
+
+        input, textarea, select {
+            flex: 1;
+        }
+    }
+
+    input,
+    textarea {
+        border-color: #ebebeb;
+        padding: 10px;
+    }
+    input {
+        height: 50px;
+        margin-bottom: 30px;
+        border: 1px solid $border-color;
+        outline: none;
+        width: 100%;
+        @include border-radius(3px);
+        @include breakpoint (sm) {
+            width: calc(100% / 2 - 15px);
+        }
+    }
+    textarea {
+        border: 1px solid $border-color;
+        min-height: 200px;
+        padding: 15px;
+        margin-bottom: 35px;
+        outline: none;
+        @include border-radius(3px);
+    }
+    .food-btn {
+        outline: none;
+        margin-bottom: 60px;
+        @extend %pointer;
+    }
+}
+
+.form-errors {
+    margin-bottom: 10px;
+    color: red;
+    text-align: center;
+}
+
+.action-icon {
+    font-size: 18px;
+    margin-right: 4px;
+}
+
+.back {
+    padding: 15px;
+    font-size: 16px;
+}
+
+.bootstrap-select {
+    width: 100% !important;
 }
