@@ -36,8 +36,10 @@ class UserComposer
             'items' => $cart->cartItems,
             'service' => $this->cartService,
             'cart' => $cart,
+            'shipping_time' => $this->cartService->calculateShippingTime($cart)
         ]);
 
         $view->with('role', $user?->type);
+        $view->with('currentUser', $user);
     }
 }

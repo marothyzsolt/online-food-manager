@@ -27,6 +27,30 @@
             </div>
 
             <div class="mt-4">
+                <x-label for="phone" :value="__('Telefonszám')" />
+
+                <x-input id="phone" class="block mt-1 w-full" type="text" name="phone" :value="old('phone')" required />
+            </div>
+
+            <div class="mt-4">
+                <x-label for="zip" :value="__('Irányítószám')" />
+
+                <x-input id="zip" class="block mt-1 w-full" type="text" name="zip" :value="old('zip')" required />
+            </div>
+
+            <div class="mt-4">
+                <x-label for="zip" :value="__('Város')" />
+
+                <x-input id="city" class="block mt-1 w-full" type="text" name="city" :value="old('city')" required />
+            </div>
+
+            <div class="mt-4">
+                <x-label for="address" :value="__('Utca, házszám')" />
+
+                <x-input id="city" class="block mt-1 w-full" type="text" name="address" :value="old('address')" required />
+            </div>
+
+            <div class="mt-4">
                 <x-label for="type" :value="__('Type')" />
                 <select class="form-select block mt-1 w-full" name="type" id="type" required>
                     <option selected disabled>Please select type</option>

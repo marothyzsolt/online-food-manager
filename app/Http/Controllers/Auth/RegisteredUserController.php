@@ -38,17 +38,24 @@ class RegisteredUserController extends Controller
                 'email' => 'required|string|email|max:255|unique:users',
                 'type' => 'required|string',
                 'password' => 'required|string|confirmed|min:8',
+                'zip' => 'required|min:4|max:4',
+                'city' => 'required',
+                'address' => 'required',
+                'phone' => 'required',
             ]);
         } catch (ValidationException $e){
             return redirect()->route('register')->withErrors($e->errors())->withInput($request->input());
 
         }
 
-
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'type' => $request->type,
+            'zip' => $request->zip,
+            'city' => $request->city,
+            'address' => $request->address,
+            'phone' => $request->phone,
             'password' => Hash::make($request->password),
         ]);
 

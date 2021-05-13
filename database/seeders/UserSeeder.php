@@ -21,6 +21,10 @@ class UserSeeder extends Seeder
             'password' => \Hash::make('test'),
             'remember_token' => \Str::random(10),
             'type' => User::TYPE_ADMIN,
+            'zip' => '5531',
+            'city' => 'Budapest',
+            'address' => 'Király utca 24',
+            'phone' => '+36201234567',
         ]);
 
         User::create([
@@ -30,6 +34,10 @@ class UserSeeder extends Seeder
             'password' => \Hash::make('test'),
             'remember_token' => \Str::random(10),
             'type' => User::TYPE_COURIER,
+            'zip' => '5531',
+            'city' => 'Budapest',
+            'address' => 'Király utca 24',
+            'phone' => '+36201234567',
         ]);
 
         User::create([
@@ -39,6 +47,10 @@ class UserSeeder extends Seeder
             'password' => \Hash::make('test'),
             'remember_token' => \Str::random(10),
             'type' => User::TYPE_GUEST,
+            'zip' => '5531',
+            'city' => 'Budapest',
+            'address' => 'Király utca 24',
+            'phone' => '+36201234567',
         ]);
     }
 }

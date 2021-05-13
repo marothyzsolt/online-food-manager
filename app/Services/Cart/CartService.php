@@ -50,4 +50,15 @@ class CartService
     {
         return $this->getCart()->cartItems->filter(fn($cartItem) => $cartItem->item->id === $id)->count() > 0;
     }
+
+    public function calculateShippingTime(Cart $cart): int
+    {
+        $minutes = 0;
+
+        foreach ($cart->cartItems as $item) {
+            $minutes += $item->item->make_time;
+        }
+
+        return $minutes;
+    }
 }

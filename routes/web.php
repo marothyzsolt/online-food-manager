@@ -30,3 +30,4 @@ Route::resource('/restaurants/{restaurant:slug}/items', ItemController::class);
 Route::get('/cart', [CartController::class, 'index']);
 Route::get('/cart/add/{item}', [CartController::class, 'add']);
 Route::get('/cart/delete/{item}', [CartController::class, 'delete']);
+Route::post('/cart', [CartController::class, 'order']);

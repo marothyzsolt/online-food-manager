@@ -9,6 +9,10 @@
                         @csrf
                         <input type="text" name="name" placeholder="Név*">
                         <input type="email" name="email" placeholder="E-mail cím*">
+                        <input type="text" name="phone" placeholder="Telefonszám*">
+                        <input type="text" name="zip" placeholder="Irányítószám*">
+                        <input type="text" name="city" placeholder="Város*">
+                        <input type="text" name="address" placeholder="Utca, házszám*">
                         <input type="password" name="password" placeholder="Jelszó*">
                         <input type="password" name="password_confirm" placeholder="Jelszó mégegyszer*">
                         <select class="form-select block mt-1 w-full select" name="type" id="type" required>

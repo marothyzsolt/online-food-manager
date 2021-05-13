@@ -22,6 +22,10 @@
             @case('courier')
             @break
         @endswitch
+
+        <li>
+            <a class="active" href="/logout">Kijelentkezés</a>
+        </li>
     @endauth
 
     @guest

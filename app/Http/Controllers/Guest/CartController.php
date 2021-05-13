@@ -23,8 +23,9 @@ class CartController extends Controller
         $this->cartService = $cartService;
     }
 
-    public function index(): void
+    public function index(): Response
     {
+        return $this->view('guest.cart');
     }
 
     public function add(Request $request, Item $item): RedirectResponse
@@ -50,6 +51,11 @@ class CartController extends Controller
         }
 
         return $this->back(true)->cookie('cart-token', $this->cartService->getCartToken());
+    }
+
+    public function order()
+    {
+        dd('order insert');
     }
 
 
