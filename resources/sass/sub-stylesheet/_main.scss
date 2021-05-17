@@ -2197,11 +2197,11 @@
     }
 }
 
-.p-food-item {
-    .discounted {
-        text-decoration: overline;
-    }
+
+.discounted {
+    text-decoration: line-through;
 }
+
 
 .select {
     width: 100%;

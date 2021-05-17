@@ -2,7 +2,7 @@
     <div class="post-inner">
         <div class="post-thumb">
             <a href="#">
-                <img src="{{ $menu->media->link }}" alt="petuk-blog">
+                <img src="{{ $menu->media->link }}" alt="menu-img">
             </a>
         </div>
         <div class="post-content">

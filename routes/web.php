@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\Item\ItemController;
 use App\Http\Controllers\Admin\Item\MenuItemController;
 use App\Http\Controllers\Admin\Restaurant\MenuRestaurantController;
 use App\Http\Controllers\Admin\Restaurant\RestaurantController;
+use App\Http\Controllers\Admin\Restaurant\RestaurantItemController;
 use App\Http\Controllers\Guest\CartController;
 use App\Http\Controllers\Guest\MenuController;
 use App\Http\Controllers\Guest\OrderController;
@@ -20,6 +21,8 @@ Route::group(['prefix' => '/admin', 'as' => 'admin.', 'middleware' => ['user.che
         'restaurants' => 'restaurant:slug',
     ]);
 
+    Route::resource('/restaurants/{restaurant:slug}/items', RestaurantItemController::class);
+    Route::get('/restaurants/{restaurant:slug}/items/{item}/images/{hash}/delete', [RestaurantItemController::class, 'deleteImage']);
     Route::resource('/restaurants/{restaurant:slug}/menus', MenuRestaurantController::class);
     Route::resource('/restaurants/{restaurant:slug}/menus/{menu}/items', MenuItemController::class);
 });

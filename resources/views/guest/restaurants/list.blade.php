@@ -18,7 +18,7 @@
                                                 <div class="post-inner">
                                                     <div class="post-thumb">
                                                         <a href="/restaurants/{{$restaurant->slug}}">
-                                                            <img src="{{$restaurant->media->link}}" alt="petuk-blog">
+                                                            <img src="{{$restaurant->media->link}}" alt="restaurant-img">
                                                         </a>
                                                     </div>
                                                     <div class="post-content">

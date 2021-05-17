@@ -26,7 +26,7 @@
                                             <tr>
                                                 <td class="product-item">
                                                     <div class="p-thumb">
-                                                        <a href="#"><img src="{{$menu->media->link}}" alt="product"></a>
+                                                        <a href="/restaurants/{{$restaurant->slug}}/menus/{{$menu->id}}"><img src="{{$menu->media->link}}" alt="product"></a>
                                                     </div>
                                                     <div class="p-content">
                                                         <a href="/restaurants/{{$restaurant->slug}}/menus/{{$menu->id}}">{{$menu->name}}</a>

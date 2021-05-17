@@ -54,9 +54,11 @@ class Item extends Model
      */
     public function getMainPriceAttribute(): ItemPrice
     {
-        return $this->itemPrices()->whereHas('currency', function ($q) {
+        $itemPrice = $this->itemPrices()->whereHas('currency', function ($q) {
             return $q->where('code', config('app.main_currency'));
         })->first();
+
+        return $itemPrice === null ? new ItemPrice() : $itemPrice;
     }
 
     public function getDiscountedAttribute(): bool
