@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Allergen;
 use App\Models\Currency;
 use App\Models\Menu;
 use App\Models\Restaurant;
@@ -15,15 +16,17 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         User::query()->truncate();
         Restaurant::query()->truncate();
         Menu::query()->truncate();
         Currency::query()->truncate();
+        Allergen::query()->truncate();
 
         $this->call([
             UserSeeder::class,
+            AllergenSeeder::class,
             RestaurantSeeder::class,
             CurrencySeeder::class,
             MenuSeeder::class,

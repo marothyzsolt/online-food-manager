@@ -55,4 +55,14 @@ class Restaurant extends Model
 
         return $timetable;
     }
+
+    public function getLinkAttribute()
+    {
+        return '/restaurants/' . $this->slug;
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

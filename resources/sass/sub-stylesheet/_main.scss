@@ -2292,3 +2292,19 @@ form {
 .bootstrap-select {
     width: 100% !important;
 }
+
+.color-green {
+    color: green;
+}
+
+.color-red {
+    color: red;
+}
+
+.delivery-bg {
+    background-image: url(../../assets/bg-image/delivery.jpg);
+
+    h3 {
+        color: #7b7979 !important;
+    }
+}

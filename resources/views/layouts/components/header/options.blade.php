@@ -21,15 +21,22 @@
                         </h4>
                     @else
 
+                        <div class="mb-3">
+                            Kiválasztott Étterem:
+                            <div>
+                                <a href="{{ $cart->cart->restaurant->link }}">{{ $cart->cart->restaurant->name }}</a>
+                            </div>
+                        </div>
+
                         @foreach($cart->items as $item)
                             <div class="cart-item">
                                 <div class="cart-inner">
                                     <div class="cart-top">
                                         <div class="thumb">
-                                            <a href="#"><img src="{{ $item->item->mainImage()->link }}" alt=""></a>
+                                            <a href="{{ $item->item->link }}"><img src="{{ $item->item->mainImage()->link }}" alt=""></a>
                                         </div>
                                         <div class="content">
-                                            <a href="#">{{ $item->item->name }}</a>
+                                            <a href="{{ $item->item->link }}">{{ $item->item->name }}</a>
                                         </div>
                                         <div class="remove-btn">
                                             <a href="/cart/delete/{{$item->item->id}}"><i class="icofont-close"></i></a>

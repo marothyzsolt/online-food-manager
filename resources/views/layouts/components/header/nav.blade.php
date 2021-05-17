@@ -13,10 +13,16 @@
                         <li><a href="/admin/restaurants/create">Új étterem regisztrálása</a></li>
                     </ul>
                 </li>
+                <li>
+                    <a class="" href="/admin/orders">Megrendelések</a>
+                </li>
                 @break
             @case('guest')
                 <li>
                     <a class="" href="/restaurants">Éttermek</a>
+                </li>
+                <li>
+                    <a class="" href="/orders">Megrendelések</a>
                 </li>
                 @break
             @case('courier')
@@ -24,13 +30,16 @@
         @endswitch
 
         <li>
-            <a class="active" href="/logout">Kijelentkezés</a>
+            <a class="" href="/logout">Kijelentkezés</a>
         </li>
     @endauth
 
     @guest
         <li>
             <a class="" href="/restaurants">Éttermek</a>
+        </li>
+        <li>
+            <a class="" href="/register">Regisztráció</a>
         </li>
     @endguest
 </ul>

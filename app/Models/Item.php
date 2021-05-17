@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Str;
 
 class Item extends Model
 {
@@ -23,14 +24,24 @@ class Item extends Model
         return $this->hasMany(ItemPrice::class);
     }
 
-    public function menu()
+    public function menus(): BelongsToMany
     {
-        return $this->hasOne(Menu::class);
+        return $this->belongsToMany(Menu::class);
+    }
+
+    public function restaurant(): BelongsTo
+    {
+        return $this->belongsTo(Restaurant::class);
     }
 
     public function images(): BelongsToMany
     {
         return $this->belongsToMany(Media::class);
+    }
+
+    public function allergens(): BelongsToMany
+    {
+        return $this->belongsToMany(Allergen::class);
     }
 
     public function mainImage(): Media
@@ -59,5 +70,20 @@ class Item extends Model
             return $this->mainPrice->discountedPrice;
         }
         return $this->mainPrice->price;
+    }
+
+    public function getSkuAttribute()
+    {
+        return Str::upper(Str::substr(md5($this->restaurant_id), 0, 4) . $this->id);
+    }
+
+    public function isAllergenable(Allergen $allergen)
+    {
+        return $this->allergens->has($allergen->id);
+    }
+
+    public function getLinkAttribute()
+    {
+        return '/restaurants/' . $this->restaurant->slug . '/menus/' . $this->menus[0]->id . '/items/' . $this->id;
     }
 }

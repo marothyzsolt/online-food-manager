@@ -2,7 +2,10 @@
 
 namespace App\Services\Cart;
 
+use App\Http\Requests\CartOrderRequest;
 use App\Models\Cart;
+use App\Models\Order;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CartService
@@ -13,7 +16,7 @@ class CartService
     /**
      * CartService constructor.
      */
-    public function __construct(Request $request)
+    public function __construct(Request $request, private OrderService $orderService)
     {
         $this->request = $request;
     }
@@ -53,12 +56,47 @@ class CartService
 
     public function calculateShippingTime(Cart $cart): int
     {
-        $minutes = 0;
+        if ($cart === null || $cart->restaurant === null) {
+            return 0;
+        }
+        $otherOrders = $cart->restaurant->orders;
+
+        //dd($otherOrders);
+        $minutes = 20;
 
         foreach ($cart->cartItems as $item) {
             $minutes += $item->item->make_time;
         }
 
         return $minutes;
+    }
+
+    public function sendOrder(CartOrderRequest $request, ?User $user): Order
+    {
+        $this->orderService->setCart($this->getCart());
+
+        if ($user = auth()->user()) {
+            $data = [
+                'name' => $user->name,
+                'zip' => $user->zip,
+                'city' => $user->city,
+                'address' => $user->address,
+                'phone' => $request->get('phone'),
+                'email' => $user->email,
+                'comment' => $request->get('comment'),
+            ];
+        } else {
+            $data = $request->only(['name', 'zip', 'city', 'address', 'phone', 'email', 'comment']);
+        }
+
+        $order = match ((int) request()->get('type', -1)) {
+            Order::TYPE_PERSONAL => $this->orderService->makePersonalOrder($data, $user),
+            Order::TYPE_DELIVERY => $this->orderService->makeDeliveryOrder($data, $user),
+        };
+
+        $this->orderService->insertCartItemsToOrder($order);
+        $this->orderService->finishCart();
+
+        return $order;
     }
 }

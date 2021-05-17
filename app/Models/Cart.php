@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Cart extends Model
@@ -13,6 +14,8 @@ class Cart extends Model
     protected $fillable = [
         'token',
         'user_id',
+        'active',
+        'restaurant_id',
     ];
 
     public function cartItems(): HasMany
@@ -28,5 +31,10 @@ class Cart extends Model
         }
 
         return $total;
+    }
+
+    public function restaurant(): BelongsTo
+    {
+        return $this->belongsTo(Restaurant::class);
     }
 }

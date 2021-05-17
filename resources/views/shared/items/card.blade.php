@@ -16,7 +16,7 @@
             @endif
         </div>
         <div class="p-food-content">
-            <h6><a href="#">{{ $item->name }}</a></h6>
+            <h6><a href="/restaurants/{{ $item->menus[0]->restaurant->slug }}/menus/{{ $item->menus[0]->id }}/items/{{ $item->id }}">{{ $item->name }}</a></h6>
             <div class="p-food-group">
                 {{ $item->description }}
             </div>

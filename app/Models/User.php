@@ -35,7 +35,8 @@ class User extends Authenticatable
         'zip',
         'city',
         'password',
-        'address'
+        'address',
+        'type',
     ];
 
     /**
@@ -65,5 +66,10 @@ class User extends Authenticatable
     public function restaurants(): HasMany
     {
         return $this->hasMany(Restaurant::class);
+    }
+
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
     }
 }

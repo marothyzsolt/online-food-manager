@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Restaurant;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -18,6 +19,8 @@ class CreateCartsTable extends Migration
             $table->id();
             $table->string('token')->unique();
             $table->foreignIdFor(User::class)->nullable();
+            $table->foreignIdFor(Restaurant::class)->nullable();
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
     }

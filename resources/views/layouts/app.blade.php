@@ -22,6 +22,8 @@
     <link href="{{ mix('/css/sass/app.css') }}" rel="stylesheet">
     <script src="{{ mix('/js/app.js') }}"></script>
 
+    @yield('stylesheet')
+
     <title>Online Food Manager</title>
 </head>
 
@@ -32,6 +34,16 @@
 
 @include('layouts.components.header.mobile_nav')
 @include('layouts.components.header.header')
+
+@if (\Session::has('cart'))
+    @if (\Session::get('cart') === 'restaurant_error')
+        <div class="alert alert-danger mb-0 text-center">
+            Már a kosaradban van egy termék a '<a href="{{ $cart->cart->restaurant->link }}">{{ $cart->cart->restaurant->name }}</a>' étteremből. Egyszerre csak egy étteremből rendelhetsz!
+            <br>
+            <a href="{{ $cart->cart->restaurant->link }}">Elérhető kínálat megtekintése...</a>
+        </div>
+    @endif
+@endif
 
 @yield('main')
 
@@ -54,6 +66,8 @@
 <script src="/assets/js/functions.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
+@yield('script')
 
 <script>
   $(function () {

@@ -1,5 +1,4 @@
 const mix = require('laravel-mix');
-const sass = require('node-sass')
 
 /*
  |--------------------------------------------------------------------------
@@ -14,3 +13,9 @@ const sass = require('node-sass')
 
 mix.js('resources/js/app.js', 'public/js').version();
 mix.sass('resources/sass/app.scss', 'public/css/sass').version();
+
+mix.postCss('resources/css/app.css', 'public/css', [
+    require('postcss-import'),
+    require('tailwindcss'),
+    require('autoprefixer'),
+]);

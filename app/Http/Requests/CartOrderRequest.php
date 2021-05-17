@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Order;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CartOrderRequest extends FormRequest
@@ -11,9 +12,9 @@ class CartOrderRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,16 +22,25 @@ class CartOrderRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
-        return [
-            'name' => 'required',
-            'zip' => 'required',
-            'city' => 'required',
-            'address' => 'required',
-            'phone' => 'required',
-            'email' => 'required|email',
-            'comment' => 'string',
-        ];
+        return match ($this->request->get('type', -1)) {
+            Order::TYPE_PERSONAL => [
+                'name' => 'required',
+                'phone' => 'required',
+                'email' => 'required|email',
+                'comment' => 'string',
+            ],
+            Order::TYPE_DELIVERY => [
+                'name' => 'required',
+                'zip' => 'required',
+                'city' => 'required',
+                'address' => 'required',
+                'phone' => 'required',
+                'email' => 'required|email',
+                'comment' => 'string',
+            ],
+            default => ['type' => 'required|digits_between:0,1'],
+        };
     }
 }

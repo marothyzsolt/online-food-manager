@@ -24,6 +24,11 @@ class Controller extends BaseController
 
     protected function back(bool $success, iterable $data = []): Response|RedirectResponse
     {
-        return redirect()->back()->withSuccess(['status' => $success, 'data' => $data]);
+        return redirect()->back()->with(['status' => $success] + $data);
+    }
+
+    protected function to(string $to, bool $success, iterable $data = []): Response|RedirectResponse
+    {
+        return redirect()->to($to)->with(['status' => $success] + $data);
     }
 }

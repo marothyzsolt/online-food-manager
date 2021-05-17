@@ -2,7 +2,7 @@
     <x-auth-card>
         <x-slot name="logo">
             <a href="/">
-                <a href="/"><img src="/assets/images/logo/logo.png" alt="logo" width="80px"></a>
+                @include('layouts.components.header.logo')
             </a>
         </x-slot>
 
@@ -14,7 +14,7 @@
 
             <!-- Name -->
             <div>
-                <x-label for="name" :value="__('Name')" />
+                <x-label for="name" :value="__('Név')" />
 
                 <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
             </div>
@@ -51,9 +51,9 @@
             </div>
 
             <div class="mt-4">
-                <x-label for="type" :value="__('Type')" />
+                <x-label for="type" :value="__('Fiók típus')" />
                 <select class="form-select block mt-1 w-full" name="type" id="type" required>
-                    <option selected disabled>Please select type</option>
+                    <option selected disabled>Válassz típust!</option>
                 @foreach (App\Models\User::TYPE_LIST as $type)
                     <option {{ old('type') == $type ? "selected" : "" }} value="{{ $type }}">{{ $type }}</option>
                 @endforeach
@@ -62,7 +62,7 @@
 
             <!-- Password -->
             <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
+                <x-label for="password" :value="__('Jelszó')" />
 
                 <x-input id="password" class="block mt-1 w-full"
                                 type="password"
@@ -72,7 +72,7 @@
 
             <!-- Confirm Password -->
             <div class="mt-4">
-                <x-label for="password_confirmation" :value="__('Confirm Password')" />
+                <x-label for="password_confirmation" :value="__('Jelszó mégegyszer')" />
 
                 <x-input id="password_confirmation" class="block mt-1 w-full"
                                 type="password"
@@ -81,11 +81,11 @@
 
             <div class="flex items-center justify-end mt-4">
                 <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
+                    {{ __('Bejelentkezés') }}
                 </a>
 
                 <x-button class="ml-4">
-                    {{ __('Register') }}
+                    {{ __('Regisztráció') }}
                 </x-button>
             </div>
         </form>

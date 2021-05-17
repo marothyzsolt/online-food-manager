@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\Admin\Item\ItemController;
+use App\Http\Controllers\Admin\Item\MenuItemController;
 use App\Http\Controllers\Admin\Restaurant\MenuRestaurantController;
 use App\Http\Controllers\Admin\Restaurant\RestaurantController;
 use App\Http\Controllers\Guest\CartController;
 use App\Http\Controllers\Guest\MenuController;
+use App\Http\Controllers\Guest\OrderController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,15 +21,18 @@ Route::group(['prefix' => '/admin', 'as' => 'admin.', 'middleware' => ['user.che
     ]);
 
     Route::resource('/restaurants/{restaurant:slug}/menus', MenuRestaurantController::class);
-    Route::resource('/restaurants/{restaurant:slug}/menus/{menu}/items', \App\Http\Controllers\Admin\Item\MenuItemController::class);
+    Route::resource('/restaurants/{restaurant:slug}/menus/{menu}/items', MenuItemController::class);
 });
 
 Route::get('/restaurants/{restaurant:slug}/menus/{menu}', [MenuController::class, 'show']);
 
-//Route::resource('/restaurants/{restaurant:slug}/menus/{menu}/items', MenuItemController::class);
+Route::resource('/restaurants/{restaurant:slug}/menus/{menu}/items', \App\Http\Controllers\Guest\Item\MenuItemController::class);
 Route::resource('/restaurants/{restaurant:slug}/items', ItemController::class);
 
 Route::get('/cart', [CartController::class, 'index']);
 Route::get('/cart/add/{item}', [CartController::class, 'add']);
 Route::get('/cart/delete/{item}', [CartController::class, 'delete']);
 Route::post('/cart', [CartController::class, 'order']);
+
+Route::get('/orders', [OrderController::class, 'index']);
+Route::get('/orders/{order:token}', [OrderController::class, 'show']);
