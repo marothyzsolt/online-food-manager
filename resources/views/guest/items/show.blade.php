@@ -18,7 +18,7 @@
                     <li>
                         <a href="/restaurants/{{ $restaurant->slug }}/menus/{{ $menu->id }}">Étlap: {{ $menu->name }}</a>
                     </li>
-                    <li>Veggie Tagliatelle Bolognese</li>
+                    <li>{{ $item->name }}</li>
                 </ul>
             </div>
         </div>
@@ -99,14 +99,18 @@
                                         <label>
                                             <input type="number" placeholder="1" value="1" disabled>
                                         </label>
-                                        @if ($cart->service->inCart($item->id))
-                                            <button class="food-btn style-2" disabled>
-                                                <i>Kosárban</i>
-                                            </button>
+                                        @if ($restaurant->isClosed())
+                                            <h6>Az étterem jelenleg zárva van...</h6>
                                         @else
-                                            <a class="food-btn style-2" href="/cart/add/{{ $item->id }}">
-                                                <span>Kosárba ></span>
-                                            </a>
+                                            @if ($cart->service->inCart($item->id))
+                                                <button class="food-btn style-2" disabled>
+                                                    <i>Kosárban</i>
+                                                </button>
+                                            @else
+                                                <a class="food-btn style-2" href="/cart/add/{{ $item->id }}">
+                                                    <span>Kosárba ></span>
+                                                </a>
+                                            @endif
                                         @endif
                                     </div>
                                 </div>

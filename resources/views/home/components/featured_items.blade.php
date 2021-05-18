@@ -7,9 +7,11 @@
         <div class="section-wrapper">
             <div class="row">
                 @foreach($items as $item)
-                    <div class="col-xl-4 col-md-6 col-12">
-                        @include('shared.items.card', ['item' => $item])
-                    </div>
+                    @if ($item->isActive())
+                        <div class="col-xl-4 col-md-6 col-12">
+                            @include('shared.items.card', ['item' => $item, 'restaurant' => $item->restaurant])
+                        </div>
+                    @endif
                 @endforeach
             </div>
         </div>

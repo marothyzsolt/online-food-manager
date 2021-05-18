@@ -29,6 +29,11 @@ class CartController extends Controller
     public function add(Request $request, Item $item): RedirectResponse
     {
         $cart = $this->cartService->getCart();
+
+        if ($item->restaurant->isClosed()) {
+            return $this->back(true)->cookie('cart-token', $this->cartService->getCartToken());
+        }
+
         if ($cart->restaurant !== null && $item->restaurant->id !== $cart->restaurant->id) {
             return $this->back(false, ['cart' => 'restaurant_error'])->cookie('cart-token', $this->cartService->getCartToken());
         }

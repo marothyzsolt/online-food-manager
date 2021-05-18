@@ -61,8 +61,25 @@ class Restaurant extends Model
         return '/restaurants/' . $this->slug;
     }
 
-    public function orders()
+    public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function isOpen(): bool
+    {
+        if (empty($this->openingHourList[now()->weekday()])) {
+            return false;
+        }
+        if (($openingHour = $this->openingHourList[now()->weekday() - 1]) === null) {
+            return false;
+        }
+
+        return now()->hour > $openingHour->from && now()->hour < $openingHour->to;
+    }
+
+    public function isClosed(): bool
+    {
+        return ! $this->isOpen();
     }
 }

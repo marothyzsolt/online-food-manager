@@ -11,6 +11,9 @@
                         <li><a href="/login">Bejelentkezés</a></li>
                     </ul>
                 </div>
+                <div class="w-100 text-center color-white">
+                    Jelenlegi idő: {{ now()->format('Y. m. d. H:i:s') }}
+                </div>
             </div>
         </div>
     </div>

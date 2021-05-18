@@ -70,7 +70,7 @@
             </div>
             <div class="col-xl-3 col-lg-6 col-12">
                 <div class="contact-thumb">
-                    <img src="assets/images/contac/01.png" alt="food-contact">
+                    <a href="/"><img src="/assets/images/logo/logo.png" alt="logo" width="240px"></a>
                 </div>
             </div>
         </div>

@@ -74,18 +74,26 @@ class Item extends Model
         return $this->mainPrice->price;
     }
 
-    public function getSkuAttribute()
+    public function getSkuAttribute(): string
     {
         return Str::upper(Str::substr(md5($this->restaurant_id), 0, 4) . $this->id);
     }
 
-    public function isAllergenable(Allergen $allergen)
+    public function isAllergenable(Allergen $allergen): bool
     {
         return $this->allergens->has($allergen->id);
     }
 
-    public function getLinkAttribute()
+    public function getLinkAttribute(): string
     {
+        if ($this->menus === null) {
+            return '';
+        }
         return '/restaurants/' . $this->restaurant->slug . '/menus/' . $this->menus[0]->id . '/items/' . $this->id;
+    }
+
+    public function isActive(): bool
+    {
+        return $this->menus !== null;
     }
 }

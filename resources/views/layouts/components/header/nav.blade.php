@@ -22,7 +22,10 @@
                     <a class="" href="/restaurants">Éttermek</a>
                 </li>
                 <li>
-                    <a class="" href="/orders">Megrendelések</a>
+                    <a class="" href="/admin/orders">Megrendelések</a>
+                </li>
+                <li>
+                    <a class="" href="/admin/couriers">Megrendelések</a>
                 </li>
                 @break
             @case('courier')
