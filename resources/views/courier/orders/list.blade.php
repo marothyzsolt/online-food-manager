@@ -19,6 +19,7 @@
                                     <thead>
                                     <tr>
                                         <th>Megendelő neve</th>
+                                        <th>Étterem</th>
                                         <th>Cím</th>
                                         <th>Telefonszám</th>
                                         <th>Összeg</th>
@@ -32,6 +33,7 @@
                                     @foreach($pendingOrders as $order)
                                         <tr>
                                             <td>{{ $order->name }}</td>
+                                            <td>{{ $order->restaurant->name }}</td>
                                             <td>{{ $order->zip }} {{ $order->city }}, {{ $order->address }}</td>
                                             <td>{{ $order->phone }}</td>
                                             <td>{{ $order->total }} HUF</td>
@@ -63,6 +65,7 @@
                                     <thead>
                                     <tr>
                                         <th>Megendelő neve</th>
+                                        <th>Étterem</th>
                                         <th>Cím</th>
                                         <th>Telefonszám</th>
                                         <th>Összeg</th>
@@ -74,6 +77,7 @@
                                     @foreach($acceptedOrders as $order)
                                         <tr>
                                             <td>{{ $order->name }}</td>
+                                            <td>{{ $order->restaurant->name }}</td>
                                             <td>{{ $order->zip }} {{ $order->city }}, {{ $order->address }}</td>
                                             <td>{{ $order->phone }}</td>
                                             <td>{{ $order->total }} HUF</td>

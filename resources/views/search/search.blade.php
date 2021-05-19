@@ -44,10 +44,10 @@
                                         <tr>
                                             <td class="product-item">
                                                 <div class="p-thumb">
-                                                    <a href="/restaurants/"><img src="{{ $item->mainImage()->link }}" alt="product"></a>
+                                                    <a href="{{ $item->link }}"><img src="{{ $item->mainImage()->link }}" alt="product"></a>
                                                 </div>
                                                 <div class="p-content">
-                                                    <a href="/restaurants/">{{ $item->name }}</a>
+                                                    <a href="{{ $item->link }}">{{ $item->name }}</a>
                                                 </div>
                                             </td>
                                             <td><a href="{{ $item->restaurant->link }}">{{ $item->restaurant->name }}</a></td>
