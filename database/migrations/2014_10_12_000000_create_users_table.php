@@ -25,6 +25,8 @@ class CreateUsersTable extends Migration
             $table->string('address');
             $table->string('phone');
             $table->enum('type', User::TYPE_LIST);
+            $table->integer('commission')->default(5);
+            $table->float('balance')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });

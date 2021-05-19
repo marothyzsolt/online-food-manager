@@ -45,6 +45,12 @@
     @endif
 @endif
 
+@if (\Session::has('message'))
+    <div class="alert alert-danger mb-0 text-center">
+        {{ \Session::get('message') }}
+    </div>
+@endif
+
 @yield('main')
 
 @include('layouts.components.footer.footer')

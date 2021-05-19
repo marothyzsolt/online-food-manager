@@ -6,7 +6,9 @@ use App\Models\Item;
 use App\Models\ItemPrice;
 use App\Models\Media;
 use App\Models\Restaurant;
+use App\Models\User;
 use App\Services\Media\MediaHandler;
+use App\Services\Restaurant\RestaurantService;
 use Faker\Factory;
 use Faker\Generator;
 use Illuminate\Database\Seeder;
@@ -19,7 +21,7 @@ class RestaurantSeeder extends Seeder
     /**
      * MenuSeeder constructor.
      */
-    public function __construct()
+    public function __construct(private RestaurantService $restaurantService)
     {
         $this->faker = app()->make(Generator::class);
     }
@@ -50,6 +52,17 @@ class RestaurantSeeder extends Seeder
             'email' => 'info@restaurant.hu',
             'address' => '1111 Budapest, Vár utca 23',
         ]);
+
+        $this->restaurantService->saveOpeningHours($restaurant, [
+            0 => ['from' => 0, 'to' => 24],
+            1 => ['from' => 0, 'to' => 24],
+            2 => ['from' => 0, 'to' => 24],
+            3 => ['from' => 0, 'to' => 24],
+            4 => ['from' => 0, 'to' => 24],
+            5 => ['from' => 0, 'to' => 24],
+            6 => ['from' => 0, 'to' => 24],
+        ]);
+        $restaurant->couriers()->save(User::where('email', 'courier@user.com')->first());
 
         Restaurant::factory()->count(5)->afterCreating(function (Restaurant $restaurant) use ($mediaHandler) {
             $imagePath = $this->faker->randomImage('images', '', 850, 480, 'restaurant');

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
@@ -81,5 +82,15 @@ class Restaurant extends Model
     public function isClosed(): bool
     {
         return ! $this->isOpen();
+    }
+
+    public function couriers(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'courier_restaurant');
+    }
+
+    public function users(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'courier_restaurant');
     }
 }

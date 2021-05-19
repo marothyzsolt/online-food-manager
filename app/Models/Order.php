@@ -24,8 +24,19 @@ class Order extends Model
         self::STATUS_DELIVERED,
     ];
 
+    public const COURIER_PENDING = 'pending';
+    public const COURIER_ACCEPTED = 'accepted';
+    public const COURIER_DECLINED = 'declined';
+    public const COURIER_FINISHED = 'finished';
+    public const COURIER_LIST = [
+        self::COURIER_PENDING,
+        self::COURIER_ACCEPTED,
+        self::COURIER_DECLINED,
+        self::COURIER_FINISHED,
+    ];
+
     protected $fillable = [
-        'name', 'zip', 'city', 'address', 'phone', 'email', 'cart_id', 'user_id', 'type', 'comment', 'status', 'token', 'restaurant_id', 'shipping_time'
+        'name', 'zip', 'city', 'address', 'phone', 'email', 'cart_id', 'user_id', 'type', 'comment', 'status', 'token', 'restaurant_id', 'shipping_time', 'courier_id', 'courier_status'
     ];
 
     public function items(): HasMany

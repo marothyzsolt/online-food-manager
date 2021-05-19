@@ -35,6 +35,8 @@ class CreateOrdersTable extends Migration
             $table->integer('shipping_time')->default(30);
             $table->text('comment');
             $table->enum('status', Order::STATUS_LIST)->default(Order::STATUS_ORDERED);
+            $table->foreignIdFor(User::class, 'courier_id')->nullable();
+            $table->enum('courier_status', Order::COURIER_LIST)->default(Order::COURIER_PENDING);
             $table->timestamps();
         });
     }

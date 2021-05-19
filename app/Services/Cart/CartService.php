@@ -6,6 +6,7 @@ use App\Http\Requests\CartOrderRequest;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\User;
+use App\Services\Restaurant\RestaurantService;
 use Illuminate\Http\Request;
 
 class CartService
@@ -16,7 +17,7 @@ class CartService
     /**
      * CartService constructor.
      */
-    public function __construct(Request $request, private OrderService $orderService)
+    public function __construct(Request $request, private OrderService $orderService, private RestaurantService $restaurantService)
     {
         $this->request = $request;
     }
@@ -84,10 +85,13 @@ class CartService
                 'phone' => $request->get('phone'),
                 'email' => $user->email,
                 'comment' => $request->get('comment'),
+                'courier_status' => Order::COURIER_PENDING,
             ];
         } else {
             $data = $request->only(['name', 'zip', 'city', 'address', 'phone', 'email', 'comment']);
         }
+
+        $data['courier_id'] = $this->restaurantService->getActiveCourier($this->getCart()->restaurant)?->id;
 
         $order = match ((int) request()->get('type', -1)) {
             Order::TYPE_PERSONAL => $this->orderService->makePersonalOrder($data, $user),
