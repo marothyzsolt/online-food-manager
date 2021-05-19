@@ -43,7 +43,7 @@ class RestaurantService
 
     public function updateItem(Restaurant $restaurant, Item $item, Request $request): void
     {
-        $item->update($request->only(['name', 'description', 'make_time']) + ['restaurant_id' => $restaurant->id]);
+        $item->update($request->only(['name', 'description', 'make_time', 'available_from', 'available_to']) + ['restaurant_id' => $restaurant->id]);
 
         $this->updateItemPrice($item, $request);
         $this->updateItemImages($item, $request->file('media'));

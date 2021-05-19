@@ -19,6 +19,8 @@ class CreateItemsTable extends Migration
             $table->string('name');
             $table->text('description');
             $table->integer('make_time')->default(0);
+            $table->date('available_from')->nullable();
+            $table->date('available_to')->nullable();
             $table->foreignIdFor(Restaurant::class);
             $table->timestamps();
         });

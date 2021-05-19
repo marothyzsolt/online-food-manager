@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Faker\Provider\Image;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -17,7 +18,7 @@ class Item extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'description', 'make_time', 'restaurant_id'
+        'name', 'description', 'make_time', 'restaurant_id', 'available_from', 'available_to'
     ];
 
     public function itemPrices(): HasMany
@@ -48,6 +49,21 @@ class Item extends Model
     public function mainImage(): Media
     {
         return $this->images[0] ?? new Media();
+    }
+
+    public function isAvailable(): bool
+    {
+        $from = true;
+        $to = true;
+
+        if ($this->available_from) {
+            $from = now() > Carbon::make($this->available_from);
+        }
+        if ($this->available_to) {
+            $to = now() < Carbon::make($this->available_to);
+        }
+
+        return $from && $to;
     }
 
     /**

@@ -30,6 +30,11 @@
     <label for="">Elkészítési idő (perc)</label>
     <input type="number" name="make_time" required value="{{old('make_time', $item->make_time)}}">
 </div>
+<div class="form-row">
+    <label for="">Előrhető</label>
+    <input type="date" name="available_from" value="{{old('available_from', $item->available_from)}}">
+    <input type="date" name="available_to" value="{{old('available_to', $item->available_to)}}">
+</div>
 
 <fieldset>
     <h5>Ételhez tartozó képek</h5>

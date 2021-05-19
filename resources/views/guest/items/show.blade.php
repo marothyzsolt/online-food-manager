@@ -99,18 +99,22 @@
                                         <label>
                                             <input type="number" placeholder="1" value="1" disabled>
                                         </label>
-                                        @if ($restaurant->isClosed())
-                                            <h6>Az étterem jelenleg zárva van...</h6>
-                                        @else
-                                            @if ($cart->service->inCart($item->id))
-                                                <button class="food-btn style-2" disabled>
-                                                    <i>Kosárban</i>
-                                                </button>
+                                        @if ($item->isAvailable())
+                                            @if ($restaurant->isClosed())
+                                                <h6>Az étterem jelenleg zárva van...</h6>
                                             @else
-                                                <a class="food-btn style-2" href="/cart/add/{{ $item->id }}">
-                                                    <span>Kosárba ></span>
-                                                </a>
+                                                @if ($cart->service->inCart($item->id))
+                                                    <button class="food-btn style-2" disabled>
+                                                        <i>Kosárban</i>
+                                                    </button>
+                                                @else
+                                                    <a class="food-btn style-2" href="/cart/add/{{ $item->id }}">
+                                                        <span>Kosárba ></span>
+                                                    </a>
+                                                @endif
                                             @endif
+                                        @else
+                                            <h6>Ez a termék jelenleg nem elérhető</h6>
                                         @endif
                                     </div>
                                 </div>

@@ -43,18 +43,22 @@
                         </div>
                     </div>
                     <div class="right">
-                        @if ($restaurant->isClosed())
-                            <h6>Az étterem jelenleg zárva van...</h6>
-                        @else
-                            @if($cart->service->inCart($item->id))
-                                <button class="btn btn-info" disabled>
-                                    <i>Kosárban</i>
-                                </button>
+                        @if ($item->isAvailable())
+                            @if ($restaurant->isClosed())
+                                <h6>Az étterem jelenleg zárva van...</h6>
                             @else
-                                <a class="btn btn-info" href="/cart/add/{{$item->id}}">
-                                    Kosárba >
-                                </a>
+                                @if($cart->service->inCart($item->id))
+                                    <button class="btn btn-info" disabled>
+                                        <i>Kosárban</i>
+                                    </button>
+                                @else
+                                    <a class="btn btn-info" href="/cart/add/{{$item->id}}">
+                                        Kosárba >
+                                    </a>
+                                @endif
                             @endif
+                        @else
+                            <h6>Ez a termék jelenleg nem elérhető</h6>
                         @endif
                     </div>
                 </div>

@@ -32,6 +32,8 @@ class UpdateRestaurantItemRequest extends FormRequest
             'media.*' => 'mimes:jpeg,jpg,png,gif|image',
             'discount_type' => 'required',
             'allergens' => 'array',
+            'available_from' => 'nullable|date',
+            'available_to' => 'nullable|date',
         ];
 
         if ($this->request->get('discount_type') !== '0') {
