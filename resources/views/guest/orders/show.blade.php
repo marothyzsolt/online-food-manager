@@ -20,8 +20,7 @@
 
             <div class="section-header mb-5 pb-5">
                 <h3>{{ $order->statusText }}</h3>
-                @if ($order->status === \App\Models\Order::STATUS_ORDERED)
-                    <h5>Kiszállításra vár...</h5>
+                @if ($order->status !== \App\Models\Order::STATUS_DELIVERED)
                     <p>
                         Még {{ $order->arrivedAtText }}...
                     </p>

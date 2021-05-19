@@ -93,8 +93,6 @@ class CartService
 
         $data['courier_id'] = $this->restaurantService->getActiveCourier($this->getCart()->restaurant)?->id;
 
-        dd($data);
-
         $order = match ((int) request()->get('type', -1)) {
             Order::TYPE_PERSONAL => $this->orderService->makePersonalOrder($data, $user),
             Order::TYPE_DELIVERY => $this->orderService->makeDeliveryOrder($data, $user),

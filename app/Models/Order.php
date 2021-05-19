@@ -17,10 +17,14 @@ class Order extends Model
     public const TYPE_DELIVERY = 1;
 
     public const STATUS_ORDERED = 'ordered';
+    public const STATUS_MAKING = 'making';
+    public const STATUS_FINISHED = 'finished';
     public const STATUS_DELIVERING = 'delivering';
     public const STATUS_DELIVERED = 'delivered';
     public const STATUS_LIST = [
         self::STATUS_ORDERED,
+        self::STATUS_MAKING,
+        self::STATUS_FINISHED,
         self::STATUS_DELIVERING,
         self::STATUS_DELIVERED,
     ];
@@ -60,7 +64,9 @@ class Order extends Model
     {
         return match ($this->status) {
             self::STATUS_ORDERED => 'RENDELÉS LEADVA',
-            self::STATUS_DELIVERING => 'KISZÁLLÍTÁS FOLYAMATBAN',
+            self::STATUS_MAKING => 'AZ ÉTELED KÉSZÜL...',
+            self::STATUS_DELIVERING => 'FUTÁRNAK ÁTADVA, KISZÁLLÍTÁS ALATT...',
+            self::STATUS_FINISHED => 'ÉTEL ELKÉSZÜLT, FUTÁRRA VÁR...',
             self::STATUS_DELIVERED => 'RENDELÉS TELJESÍTVE',
         };
     }
@@ -81,5 +87,10 @@ class Order extends Model
     public function restaurant(): BelongsTo
     {
         return $this->belongsTo(Restaurant::class);
+    }
+
+    public function courier(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'courier_id');
     }
 }

@@ -16,13 +16,21 @@ class CourierOrderController extends Controller
         /** @var User $user */
         $user = auth()->user();
         $pendingOrders = $user->courierOrders()->where(function ($q) {
-            $q->where('orders.courier_status', Order::COURIER_PENDING);
+            $q->where('orders.courier_status', Order::COURIER_PENDING)->where('orders.type', Order::TYPE_DELIVERY)->where('orders.status', Order::STATUS_FINISHED);
         })->get();
-        $acceptedOrders = $user->courierOrders()->where('orders.courier_status', Order::COURIER_ACCEPTED)->get();
-        $finishedOrdersCount = $user->courierOrders()->where('orders.courier_status', Order::COURIER_FINISHED)->count();
+        $acceptedOrders = Order::where(['courier_id' => $user->id])->where('orders.courier_status', Order::COURIER_ACCEPTED)->get();
+        $finishedOrders = Order::where(['courier_id' => $user->id])->where('orders.courier_status', Order::COURIER_FINISHED)->get();
+
+        $balance = 0;
+        foreach ($finishedOrders as $order) {
+            if ($user->commission > 0 && $user->commission < 100) {
+                $balance += $order->total / $user->commission / 100;
+            }
+        }
+
         $stat = [
-            'finished_orders' => $finishedOrdersCount ?? 0,
-            'balance' => $user->balance ?? 0,
+            'finished_orders' => count($finishedOrders) ?? 0,
+            'balance' => $balance ?? 0,
             'commission' => $user->commission ?? 0,
         ];
 
@@ -31,7 +39,7 @@ class CourierOrderController extends Controller
 
     public function accept(Order $order): RedirectResponse
     {
-        $order->update(['courier_status' => Order::COURIER_ACCEPTED]);
+        $order->update(['courier_status' => Order::COURIER_ACCEPTED, 'status' => Order::STATUS_DELIVERING, 'courier_id' => auth()->user()->id]);
 
         return $this->back(true, ['message' => 'Sikeres megrendelés elfogadás']);
     }
@@ -45,8 +53,8 @@ class CourierOrderController extends Controller
 
     public function finished(Order $order): RedirectResponse
     {
-        $order->update(['courier_status' => Order::COURIER_FINISHED, 'courier_id' => null]);
+        $order->update(['courier_status' => Order::COURIER_FINISHED, 'status' => Order::STATUS_DELIVERED]);
 
-        return $this->back(true, ['message' => 'Megrendelés elutasítva']);
+        return $this->back(true, ['message' => 'Megrendelés lezárva, étel átadva']);
     }
 }

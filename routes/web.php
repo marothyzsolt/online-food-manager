@@ -39,6 +39,10 @@ Route::group(['prefix' => '/admin', 'as' => 'admin.', 'middleware' => ['user.che
     ]);
 
     Route::get('/orders', [\App\Http\Controllers\Admin\OrderController::class, 'index']);
+    Route::get('/orders/{order}/status/making', [\App\Http\Controllers\Admin\OrderController::class, 'statusMaking']);
+    Route::get('/orders/{order}/status/finished', [\App\Http\Controllers\Admin\OrderController::class, 'statusFinished']);
+    Route::get('/orders/{order}/status/delivered', [\App\Http\Controllers\Admin\OrderController::class, 'statusDelivered']);
+    Route::get('/orders/{order}/status/refresh', [\App\Http\Controllers\Admin\OrderController::class, 'statusRefresh']);
 });
 
 Route::group(['middleware' => ['auth']], function() {
@@ -49,7 +53,7 @@ Route::group(['middleware' => ['auth']], function() {
         Route::get('/orders', [CourierOrderController::class, 'index']);
         Route::get('/orders/{order}/accept', [CourierOrderController::class, 'accept']);
         Route::get('/orders/{order}/decline', [CourierOrderController::class, 'decline']);
-        Route::get('/orders/{order}/finished', [CourierOrderController::class, 'decline']);
+        Route::get('/orders/{order}/finished', [CourierOrderController::class, 'finished']);
     });
 });
 

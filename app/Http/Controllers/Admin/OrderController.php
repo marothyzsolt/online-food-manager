@@ -10,12 +10,51 @@ use Illuminate\Http\Response;
 
 class OrderController extends Controller
 {
-    public function index(): Response
+    public function index(Request $request): Response
     {
         /** @var User $user */
         $user = auth()->user();
-        $orders = Order::whereIn('restaurant_id', $user->restaurants->pluck('id'))->get();
+        $fromString = $request->get('from', '') ?? '';
+        $toString = $request->get('to', '') ?? '';
 
-        return $this->view('admin.orders', compact('orders', 'user'));
+        $orders = Order::whereIn('restaurant_id', $user->restaurants->pluck('id'));
+        if (strlen($fromString) > 0) {
+            $orders->where('created_at', '>', $fromString);
+        }
+        if (strlen($toString) > 0) {
+            $orders->where('created_at', '<', $toString);
+        }
+
+        $orders = $orders->get();
+
+        return $this->view('admin.orders', compact('orders', 'user', 'fromString', 'toString'));
+    }
+
+    public function statusMaking(Order $order)
+    {
+        $order->update(['status' => Order::STATUS_MAKING]);
+
+        return $this->back(true);
+    }
+
+    public function statusFinished(Order $order)
+    {
+        $order->update(['status' => Order::STATUS_FINISHED]);
+
+        return $this->back(true);
+    }
+
+    public function statusDelivered(Order $order)
+    {
+        $order->update(['status' => Order::STATUS_DELIVERED]);
+
+        return $this->back(true);
+    }
+
+    public function statusRefresh(Order $order)
+    {
+        $order->update(['courier_status' => Order::COURIER_PENDING]);
+
+        return $this->back(true);
     }
 }

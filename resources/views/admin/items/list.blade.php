@@ -10,7 +10,7 @@
                 <div class="shop-cart">
                     <div class="container">
                         <div class="section-wrapper">
-                            <a class="back" href="/admin/restaurants/{{ $restaurant->slug }}">< Vissza</a>
+                            <a class="back" href="/admin/restaurants">< Vissza</a>
                             <div class="cart-top">
                                 <table>
                                     <thead>

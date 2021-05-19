@@ -33,7 +33,7 @@ class CartOrderRequest extends FormRequest
             ],
             Order::TYPE_DELIVERY => [
                 'name' => 'required',
-                'zip' => 'required',
+                'zip' => 'required|numeric',
                 'city' => 'required',
                 'address' => 'required',
                 'phone' => 'required',
