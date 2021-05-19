@@ -54,6 +54,7 @@
                                                             @endforeach
                                                         </ul>
                                                         <a href="/admin/restaurants/{{$restaurant->slug}}/menus" class="food-btn style-2"><span>Áttekintés és szerkesztés</span></a>
+                                                        <a href="/admin/restaurants/{{$restaurant->slug}}/items" class="food-btn style-2"><span>Ételek</span></a>
                                                     </div>
                                                 </div>
                                             </div>

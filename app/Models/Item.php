@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 class Item extends Model
@@ -95,5 +96,15 @@ class Item extends Model
     public function isActive(): bool
     {
         return $this->menus !== null;
+    }
+
+    public function getAllergenListAttribute(): Collection
+    {
+        return $this->allergens()->pluck('allergens.id') ?? collect();
+    }
+
+    public function hasAllergen(Allergen $allergen)
+    {
+        return $this->allergens()->where('allergens.id', $allergen->id)->count() > 0;
     }
 }

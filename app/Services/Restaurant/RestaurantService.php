@@ -2,6 +2,7 @@
 
 namespace App\Services\Restaurant;
 
+use App\Models\Allergen;
 use App\Models\Currency;
 use App\Models\Item;
 use App\Models\ItemPrice;
@@ -43,25 +44,51 @@ class RestaurantService
     public function updateItem(Restaurant $restaurant, Item $item, Request $request): void
     {
         $item->update($request->only(['name', 'description', 'make_time']) + ['restaurant_id' => $restaurant->id]);
-        if ($item->mainPrice !== null) {
+
+        $this->updateItemPrice($item, $request);
+        $this->updateItemImages($item, $request->file('media'));
+        $this->updateItemAllergens($item, $request->get('allergens', []));
+    }
+
+    public function createItem(Restaurant $restaurant, Request $request): void
+    {
+        $item = Item::create($request->only(['name', 'description', 'make_time']) + ['restaurant_id' => $restaurant->id]);
+
+        $this->updateItemPrice($item, $request);
+        $this->updateItemImages($item, $request->file('media'));
+        $this->updateItemAllergens($item, $request->get('allergens', []));
+    }
+
+    private function updateItemAllergens(Item $item, array $allergens): void
+    {
+        $allergenList = collect($allergens)->map(fn($value, $key) => $key);
+        $item->allergens()->sync($allergenList);
+    }
+
+    private function updateItemPrice(Item $item, Request $request): void
+    {
+        if ($item->mainPrice !== null && $item->mainPrice->id !== null) {
             $item->mainPrice->update([
                 'price' => $request->get('price'),
-                'discount_type' => $request->get('discount_type'),
-                'discount' => $request->get('discount'),
+                'discount_type' => $request->get('discount_type') === '0' ? null : $request->get('discount_type'),
+                'discount' => $request->get('discount', 0) ?? 0,
             ]);
         } else {
-             ItemPrice::create([
+            ItemPrice::create([
                 'item_id' => $item->id,
                 'currency_id' => Currency::where('code', 'HUF')->first()->id,
                 'price' => $request->get('price'),
-                'discount_type' => $request->get('discount_type'),
-                'discount' => $request->get('discount', 0),
+                'discount_type' => $request->get('discount_type') === '0' ? null : $request->get('discount_type'),
+                'discount' => $request->get('discount', 0) ?? 0,
             ]);
         }
+    }
 
-        if (is_array($request->file('media')) && count($request->file('media')) > 0) {
+    private function updateItemImages(Item $item, $files): void
+    {
+        if (is_array($files) && count($files) > 0) {
             $images = [];
-            foreach ($request->file('media') as $file) {
+            foreach ($files as $file) {
                 $images[] = $this->mediaHandler->storeUploadedMedia($file);
             }
             $item->images()->saveMany($images);

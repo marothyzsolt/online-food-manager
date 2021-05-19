@@ -36,10 +36,24 @@ class RestaurantItemController extends Controller
         return $this->back(true);
     }
 
-    public function deleteImage(Restaurant $restaurant, Item $item, $hash)
+    public function deleteImage(Restaurant $restaurant, Item $item, $hash): RedirectResponse
     {
         $media = $item->images()->where('media.hash', $hash)->first();
         $item->images()->detach($media);
+
+        return $this->back(true);
+    }
+
+    public function store(UpdateRestaurantItemRequest $request, Restaurant $restaurant): RedirectResponse
+    {
+        $this->restaurantService->createItem($restaurant, $request);
+
+        return $this->back(true);
+    }
+
+    public function destroy(Restaurant $restaurant, Item $item): RedirectResponse
+    {
+        $item->delete();
 
         return $this->back(true);
     }

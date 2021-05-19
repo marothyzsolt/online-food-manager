@@ -92,5 +92,5 @@
         </div>
     </section>
 
-    @include('admin.items.create')
+    @include('admin.items.create', ['item' => new \App\Models\Item()])
 @endsection

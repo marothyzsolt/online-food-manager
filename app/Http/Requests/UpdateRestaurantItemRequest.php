@@ -24,14 +24,20 @@ class UpdateRestaurantItemRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $data = [
             'name' => 'required',
             'description' => 'required',
             'price' => 'required|numeric|min:0',
             'make_time' => 'required|numeric|min:0',
             'media.*' => 'mimes:jpeg,jpg,png,gif|image',
             'discount_type' => 'required',
-            'discount' => 'numeric|min:1|' . ($this->request->get('discount_type') === ItemPrice::DISCOUNT_TYPE_PERCENTAGE ? 'max:100' : 'max:' . $this->request->get('price')),
+            'allergens' => 'array',
         ];
+
+        if ($this->request->get('discount_type') !== '0') {
+            $data['discount'] = 'numeric|min:1|' . ($this->request->get('discount_type') === ItemPrice::DISCOUNT_TYPE_PERCENTAGE ? 'max:100' : 'max:' . $this->request->get('price'));
+        }
+
+        return $data;
     }
 }
