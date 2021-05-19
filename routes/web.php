@@ -13,6 +13,7 @@ use App\Http\Controllers\Guest\MenuController;
 use App\Http\Controllers\Guest\OrderController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -36,6 +37,8 @@ Route::group(['prefix' => '/admin', 'as' => 'admin.', 'middleware' => ['user.che
     Route::resource('/couriers', AdminCourierController::class)->parameters([
         'couriers' => 'user:id',
     ]);
+
+    Route::get('/orders', [\App\Http\Controllers\Admin\OrderController::class, 'index']);
 });
 
 Route::group(['middleware' => ['auth']], function() {
@@ -62,3 +65,5 @@ Route::post('/cart', [CartController::class, 'order']);
 
 Route::get('/orders', [OrderController::class, 'index']);
 Route::get('/orders/{order:token}', [OrderController::class, 'show']);
+
+Route::any('/search', [SearchController::class, 'index']);

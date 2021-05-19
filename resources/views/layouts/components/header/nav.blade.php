@@ -25,7 +25,10 @@
                     <a class="" href="/restaurants">Éttermek</a>
                 </li>
                 <li>
-                    <a class="" href="/admin/orders">Megrendelések</a>
+                    <a class="" href="/guest/orders">Megrendelések</a>
+                </li>
+                <li>
+                    <a class="" href="/search">Keresés</a>
                 </li>
                 @break
             @case('courier')
@@ -46,6 +49,9 @@
         </li>
         <li>
             <a class="" href="/register">Regisztráció</a>
+        </li>
+        <li>
+            <a class="" href="/search">Keresés</a>
         </li>
     @endguest
 </ul>
