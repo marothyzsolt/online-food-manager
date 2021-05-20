@@ -174,6 +174,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\ViewServiceProvider::class,
+        App\Providers\FakerServiceProvider::class
 
     ],
 
@@ -229,5 +231,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
+
+    'main_currency' => 'HUF',
 
 ];

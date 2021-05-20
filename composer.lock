@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4a16c3c541bd99241cab1c21ce8e83ac",
+    "content-hash": "f1f9be639e4025b81adbaae49b75ac79",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -460,6 +460,58 @@
             "time": "2020-12-29T14:50:06+00:00"
         },
         {
+            "name": "fakerphp/faker",
+            "version": "v1.13.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FakerPHP/Faker.git",
+                "reference": "ab3f5364d01f2c2c16113442fb987d26e4004913"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FakerPHP/Faker/zipball/ab3f5364d01f2c2c16113442fb987d26e4004913",
+                "reference": "ab3f5364d01f2c2c16113442fb987d26e4004913",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1 || ^8.0"
+            },
+            "conflict": {
+                "fzaninotto/faker": "*"
+            },
+            "require-dev": {
+                "bamarni/composer-bin-plugin": "^1.4.1",
+                "ext-intl": "*",
+                "phpunit/phpunit": "^7.5.20 || ^8.5.8 || ^9.4.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Faker\\": "src/Faker/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "François Zaninotto"
+                }
+            ],
+            "description": "Faker is a PHP library that generates fake data for you.",
+            "keywords": [
+                "data",
+                "faker",
+                "fixtures"
+            ],
+            "support": {
+                "issues": "https://github.com/FakerPHP/Faker/issues",
+                "source": "https://github.com/FakerPHP/Faker/tree/v1.13.0"
+            },
+            "time": "2020-12-18T16:50:48+00:00"
+        },
+        {
             "name": "fideloper/proxy",
             "version": "4.4.1",
             "source": {
@@ -891,6 +943,52 @@
                 "source": "https://github.com/guzzle/psr7/tree/1.7.0"
             },
             "time": "2020-09-30T07:37:11+00:00"
+        },
+        {
+            "name": "jzonta/faker-restaurant",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jzonta/FakerRestaurant.git",
+                "reference": "235492f77b01d755be2f5307b1ef2bc7164a0f5d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jzonta/FakerRestaurant/zipball/235492f77b01d755be2f5307b1ef2bc7164a0f5d",
+                "reference": "235492f77b01d755be2f5307b1ef2bc7164a0f5d",
+                "shasum": ""
+            },
+            "require": {
+                "fakerphp/faker": "^1.9.1",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.17",
+                "phpstan/phpstan": "^0.12.66",
+                "phpunit/phpunit": "^9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "FakerRestaurant\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "João Zonta"
+                }
+            ],
+            "description": "Food and Beverage names generate using fakerphp/faker",
+            "homepage": "https://github.com/jzonta/FakerRestaurant",
+            "support": {
+                "issues": "https://github.com/jzonta/FakerRestaurant/issues",
+                "source": "https://github.com/jzonta/FakerRestaurant/tree/v2.0.0"
+            },
+            "time": "2021-01-14T13:23:07+00:00"
         },
         {
             "name": "laravel/framework",
@@ -1379,6 +1477,67 @@
                 }
             ],
             "time": "2021-01-18T20:58:21+00:00"
+        },
+        {
+            "name": "marothyzsolt/laravel-foreign-keys",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/marothyzsolt/laravel-foreign-keys.git",
+                "reference": "729c59391191c1704233f38594aea95e33232bd8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/marothyzsolt/laravel-foreign-keys/zipball/729c59391191c1704233f38594aea95e33232bd8",
+                "reference": "729c59391191c1704233f38594aea95e33232bd8",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "^8.0",
+                "php": "^7.4|^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^6.0",
+                "phpunit/phpunit": "^8.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "MarothyZsolt\\LaravelForeignKeys\\LaravelForeignKeysServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "MarothyZsolt\\LaravelForeignKeys\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Zsolt Marothy",
+                    "email": "marothyzsolt@egaming.hu",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel foreign key manager",
+            "homepage": "https://github.com/marothyzsolt/laravel-foreign-keys",
+            "keywords": [
+                "foreign keys",
+                "laravel",
+                "laravel-foreign-keys",
+                "marothyzsolt"
+            ],
+            "support": {
+                "issues": "https://github.com/marothyzsolt/laravel-foreign-keys/issues",
+                "source": "https://github.com/marothyzsolt/laravel-foreign-keys/tree/master"
+            },
+            "time": "2021-03-20T19:40:49+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -5131,58 +5290,6 @@
             "time": "2020-10-16T08:27:54+00:00"
         },
         {
-            "name": "fakerphp/faker",
-            "version": "v1.13.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/FakerPHP/Faker.git",
-                "reference": "ab3f5364d01f2c2c16113442fb987d26e4004913"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/FakerPHP/Faker/zipball/ab3f5364d01f2c2c16113442fb987d26e4004913",
-                "reference": "ab3f5364d01f2c2c16113442fb987d26e4004913",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.1 || ^8.0"
-            },
-            "conflict": {
-                "fzaninotto/faker": "*"
-            },
-            "require-dev": {
-                "bamarni/composer-bin-plugin": "^1.4.1",
-                "ext-intl": "*",
-                "phpunit/phpunit": "^7.5.20 || ^8.5.8 || ^9.4.2"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Faker\\": "src/Faker/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "François Zaninotto"
-                }
-            ],
-            "description": "Faker is a PHP library that generates fake data for you.",
-            "keywords": [
-                "data",
-                "faker",
-                "fixtures"
-            ],
-            "support": {
-                "issues": "https://github.com/FakerPHP/Faker/issues",
-                "source": "https://github.com/FakerPHP/Faker/tree/v1.13.0"
-            },
-            "time": "2020-12-18T16:50:48+00:00"
-        },
-        {
             "name": "filp/whoops",
             "version": "2.11.0",
             "source": {
@@ -5303,6 +5410,62 @@
                 "source": "https://github.com/hamcrest/hamcrest-php/tree/v2.0.1"
             },
             "time": "2020-07-09T08:09:16+00:00"
+        },
+        {
+            "name": "laravel/breeze",
+            "version": "v1.1.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/breeze.git",
+                "reference": "222889eecf49bb02ea91e2122c9ab9f8379c0c45"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/breeze/zipball/222889eecf49bb02ea91e2122c9ab9f8379c0c45",
+                "reference": "222889eecf49bb02ea91e2122c9ab9f8379c0c45",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/filesystem": "^8.0",
+                "illuminate/support": "^8.0",
+                "php": "^7.3|^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.x-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Laravel\\Breeze\\BreezeServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laravel\\Breeze\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                }
+            ],
+            "description": "Minimal Laravel authentication scaffolding with Blade and Tailwind.",
+            "keywords": [
+                "auth",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/laravel/breeze/issues",
+                "source": "https://github.com/laravel/breeze"
+            },
+            "time": "2021-04-27T17:35:17+00:00"
         },
         {
             "name": "laravel/sail",
@@ -7356,7 +7519,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "marothyzsolt/laravel-foreign-keys": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
